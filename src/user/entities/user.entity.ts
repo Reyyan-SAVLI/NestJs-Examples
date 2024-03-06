@@ -1,9 +1,10 @@
-import { Column, CreateDateColumn, DeleteDateColumn, Entity, PrimaryColumn, UpdateDateColumn } from "typeorm";
+import {Column, Entity, OneToMany} from "typeorm";
+import { MyBaseEntity } from "src/entities/my.base.entity";
+import { Product } from "src/product/entities/product.entity";
+
 
 @Entity()
-export class User{
-    @PrimaryColumn()
-    id: string;
+export class User extends MyBaseEntity{
 
     @Column()
     name: string;
@@ -14,12 +15,6 @@ export class User{
     @Column()
     birthday!: Date;
 
-    @CreateDateColumn()
-    createdAt!: Date;
-
-    @UpdateDateColumn()
-    updatedAt!: Date;
-
-    @DeleteDateColumn()
-    deletedAt!: Date;
+    @OneToMany(()=> Product, (product) => product.user)
+    products: Product[];
 }

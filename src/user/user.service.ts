@@ -3,7 +3,6 @@ import { CreateUserDto } from './dto/create-user.dto';
 import { User } from './entities/user.entity';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
-import { v4 as uuidv4 } from "uuid";
 import { UpdateUserDto } from './dto/update-user.dto';
 
 @Injectable()
@@ -21,7 +20,6 @@ export class UserService {
 
     async create(createUserDto: CreateUserDto){
         const newUser = await this.userRepository.create();
-        newUser.id = uuidv4();
         newUser.email = createUserDto.email;
         newUser.name = createUserDto.name;
         newUser.birthday = createUserDto.birthday;
